@@ -14,8 +14,7 @@
     "ext-curl": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.2",
-    "monolog/monolog": "^2.1"
+    "phpunit/phpunit": "^9.2"
   },
   "license": "Beerware",
   "autoload": {
