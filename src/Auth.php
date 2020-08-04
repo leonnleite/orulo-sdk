@@ -32,7 +32,9 @@ class Auth
 
     protected string $grantType = 'client_credentials';
 
-    public function __construct(string $clientId, string $clientSecret, ClientInterface $httpClient)
+    private \GuzzleHttp\Client $httpClient;
+
+    public function __construct(string $clientId, string $clientSecret, \GuzzleHttp\Client $httpClient)
     {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
@@ -120,7 +122,7 @@ class Auth
             'Content-Type'=> 'application/x-www-form-urlencoded'
         ], http_build_query($formParams));
 
-        $response = $this->httpClient->sendRequest($request);
+        $response = $this->httpClient->send($request);
 
         if ($response->getStatusCode() !== 200) {
             throw new UnauthorizedAuthenticationException();

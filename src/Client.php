@@ -11,13 +11,17 @@ use LeonnLeite\Orulo\Request\State;
 use Psr\Http\Client\ClientInterface;
 
 
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\MessageFormatter;
+
 class Client
 {
     protected static string $baseUri = 'https://www.orulo.com.br/';
 
     protected Auth $auth;
 
-    protected ClientInterface $httpClient;
+    protected \GuzzleHttp\Client $httpClient;
 
     private State $state;
 
@@ -25,7 +29,7 @@ class Client
 
     private Partner $partner;
 
-    public function __construct(string $clientId, string $clientSecret, ?ClientInterface $httpClient = null)
+    public function __construct(string $clientId, string $clientSecret, ?\GuzzleHttp\Client $httpClient = null)
     {
         $this->httpClient = $httpClient ?? new \GuzzleHttp\Client();
         $this->auth = new Auth($clientId, $clientSecret, $this->httpClient);
@@ -68,11 +72,10 @@ class Client
     /**
      * @return ClientInterface|\GuzzleHttp\Client
      */
-    public function getHttpClient(): ClientInterface
+    public function getHttpClient(): \GuzzleHttp\Client
     {
         return $this->httpClient;
     }
-
 
 
 }

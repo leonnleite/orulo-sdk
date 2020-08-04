@@ -29,7 +29,7 @@ class Building extends \LeonnLeite\Orulo\Request
         $url = Client::getBaseUri() . self::getPath();
 
         $request = $this->createGetRequest($url, $this->client, $params);
-        $response = $this->client->getHttpClient()->sendRequest($request);
+        $response = $this->client->getHttpClient()->send($request);
         if ($response->getStatusCode() !== 200) {
             throw new \InvalidArgumentException();
         }
@@ -44,7 +44,7 @@ class Building extends \LeonnLeite\Orulo\Request
         $url = Client::getBaseUri() . self::getPath() . '/' . $id;
 
         $request = $this->createGetRequest($url, $this->client);
-        $response = $this->client->getHttpClient()->sendRequest($request);
+        $response = $this->client->getHttpClient()->send($request);
         if ($response->getStatusCode() !== 200) {
             throw new \InvalidArgumentException();
         }
@@ -58,7 +58,7 @@ class Building extends \LeonnLeite\Orulo\Request
         $url = Client::getBaseUri() . self::getPath() . '/' . $name . '/search';
         $request = $this->createGetRequest($url, $this->client, $params);
 
-        $response = $this->client->getHttpClient()->sendRequest($request);
+        $response = $this->client->getHttpClient()->send($request);
         if ($response->getStatusCode() !== 200) {
             throw new \InvalidArgumentException();
         }
