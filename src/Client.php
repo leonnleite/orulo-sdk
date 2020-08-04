@@ -8,14 +8,8 @@ namespace LeonnLeite\Orulo;
 use LeonnLeite\Orulo\Request\Building;
 use LeonnLeite\Orulo\Request\Partner;
 use LeonnLeite\Orulo\Request\State;
-use Monolog\Handler\StreamHandler;
 use Psr\Http\Client\ClientInterface;
 
-
-use Monolog\Logger;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\MessageFormatter;
 
 class Client
 {
@@ -33,21 +27,7 @@ class Client
 
     public function __construct(string $clientId, string $clientSecret, ?ClientInterface $httpClient = null)
     {
-
-        $stack = HandlerStack::create();
-
-
-        $log = new Logger('logger');
-        $log->pushHandler(new StreamHandler(__DIR__ . '/your.log', Logger::DEBUG));
-        $stack->push(
-            Middleware::log(
-                $log,
-                new MessageFormatter('{req_headers} {host} - {method} - {uri} - {req_body}  @ ')
-            )
-        );
-        $this->httpClient = $httpClient ?? new \GuzzleHttp\Client([
-                'handler' => $stack,
-        ]);
+        $this->httpClient = $httpClient ?? new \GuzzleHttp\Client();
         $this->auth = new Auth($clientId, $clientSecret, $this->httpClient);
 
         $this->state = new State($this);
