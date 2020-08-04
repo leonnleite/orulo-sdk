@@ -17,7 +17,7 @@
     "phpunit/phpunit": "^9.2",
     "monolog/monolog": "^2.1"
   },
-  "license": "MIT & BeerWare",
+  "license": "BeerWare",
   "autoload": {
     "psr-4": {
       "LeonnLeite\\Orulo\\": "src/"
