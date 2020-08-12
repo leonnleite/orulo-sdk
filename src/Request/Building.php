@@ -12,14 +12,30 @@ class Building extends \LeonnLeite\Orulo\Request
 
     protected Client $client;
 
+    protected BuildingImage $buildingImage;
+
+    protected BuildingFile $buildingFile;
+
     public function __construct(Client $client)
     {
         $this->client = $client;
+        $this->buildingImage = new BuildingImage($client);
+        $this->buildingFile = new BuildingFile($client);
     }
 
     private static function getPath()
     {
         return self::$path;
+    }
+
+    public function getBuildingImage(): BuildingImage
+    {
+        return $this->buildingImage;
+    }
+
+    public function getBuildingFile(): BuildingFile
+    {
+        return $this->buildingFile;
     }
 
     public function findAll(array $params = [])
